@@ -1,31 +1,45 @@
 import { Entity } from '@/core/entities/entity'
 import { Identity } from '@/core/entities/identity'
+import { Optional } from '@/core/types/optional'
+import Email from '@/domain/shared/email'
 
 type UserType = {
-	id: string
-	email: string
+	email: Email
 	name: string
 	password: string
+	createdAt?: Date
+	updatedAt?: Date
 }
 
 export class User extends Entity<UserType> {
-	constructor(data: UserType, id?: Identity) {
-		super(data, id)
+	static create(
+		data: Optional<UserType, 'createdAt' | 'updatedAt'>,
+		id?: Identity
+	) {
+		return new User({ ...data }, id)
 	}
 
-	get email(): string {
+	get email() {
 		return this.attributes.email
 	}
 
-	get name(): string {
+	get name() {
 		return this.attributes.name
 	}
 
-	get password(): string {
+	get password() {
 		return this.attributes.password
 	}
 
-	set email(email: string) {
+	get createdAt() {
+		return this.attributes.createdAt
+	}
+
+	get updatedAt() {
+		return this.attributes.updatedAt
+	}
+
+	set email(email: Email) {
 		this.attributes.email = email
 	}
 
@@ -35,5 +49,9 @@ export class User extends Entity<UserType> {
 
 	set password(password: string) {
 		this.attributes.password = password
+	}
+
+	set updatedAt(updatedAt: Date) {
+		this.attributes.updatedAt = updatedAt
 	}
 }

@@ -94,5 +94,8 @@ describe('EditUserUseCase', () => {
 		expect(userRepository.items[0].name).toBe('new_name')
 		expect(userRepository.items[0].email.value).toBe('new_email@email.com')
 		expect(userRepository.items[0].password).toBe(hashedPassword)
+		expect(userRepository.items[0].updatedAt).not.toBe(
+			userRepository.items[0].createdAt
+		)
 	})
 })

@@ -3,7 +3,7 @@ import { Identity } from '@/core/entities/identity'
 import { Optional } from '@/core/types/optional'
 
 type NoteType = {
-	id: string
+	userId: string
 	title: string
 	text: string
 	color: string
@@ -14,7 +14,10 @@ type NoteType = {
 
 export class Note extends Entity<NoteType> {
 	static create(
-		data: Optional<NoteType, 'text' | 'color' | 'isFavorite'>,
+		data: Optional<
+			NoteType,
+			'text' | 'color' | 'isFavorite' | 'createdAt' | 'updatedAt'
+		>,
 		id?: Identity
 	) {
 		return new Note(
@@ -22,7 +25,9 @@ export class Note extends Entity<NoteType> {
 				...data,
 				isFavorite: data.isFavorite ?? false,
 				color: data.color ?? '#FFFFFF',
-				text: data.text ?? ''
+				text: data.text ?? '',
+				createdAt: data.createdAt ?? new Date(),
+				updatedAt: data.updatedAt ?? new Date()
 			},
 			id
 		)
@@ -50,6 +55,14 @@ export class Note extends Entity<NoteType> {
 
 	get updatedAt(): Date {
 		return this.attributes.updatedAt
+	}
+
+	get userId(): string {
+		return this.attributes.userId
+	}
+
+	set userId(userId: string) {
+		this.attributes.userId = userId
 	}
 
 	set title(title: string) {

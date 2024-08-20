@@ -34,4 +34,8 @@ export class InMemoryUserRepository extends UserRepository {
 
 		this.items[index] = user
 	}
+
+	async findMany(): Promise<User[]> {
+		return this.items
+	}
 }

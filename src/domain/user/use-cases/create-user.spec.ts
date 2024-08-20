@@ -28,6 +28,8 @@ describe('CreateUserUseCase', () => {
 		expect(userRepository.items[0].email.value).toBe(
 			'valid_email@email.com'
 		)
+		expect(userRepository.items[0].createdAt).toBeInstanceOf(Date)
+		expect(userRepository.items[0].updatedAt).toBeInstanceOf(Date)
 	})
 
 	test('Should not create a user with an already registered email.', async () => {

@@ -7,8 +7,8 @@ type UserType = {
 	email: Email
 	name: string
 	password: string
-	createdAt?: Date
-	updatedAt?: Date
+	createdAt: Date
+	updatedAt: Date
 }
 
 export class User extends Entity<UserType> {
@@ -16,7 +16,14 @@ export class User extends Entity<UserType> {
 		data: Optional<UserType, 'createdAt' | 'updatedAt'>,
 		id?: Identity
 	) {
-		return new User({ ...data }, id)
+		return new User(
+			{
+				...data,
+				createdAt: data.createdAt ?? new Date(),
+				updatedAt: data.updatedAt ?? new Date()
+			},
+			id
+		)
 	}
 
 	get email() {

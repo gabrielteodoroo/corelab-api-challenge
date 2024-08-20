@@ -38,4 +38,10 @@ export class InMemoryUserRepository extends UserRepository {
 	async findMany(): Promise<User[]> {
 		return this.items
 	}
+
+	async delete(id: string): Promise<void> {
+		const index = this.items.findIndex(user => user.id.toString() === id)
+
+		this.items.splice(index, 1)
+	}
 }

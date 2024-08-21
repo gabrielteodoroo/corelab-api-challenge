@@ -8,4 +8,12 @@ export class InMemoryNoteRepository extends NoteRepository {
 		this.items.push(note)
 		return note
 	}
+
+	async findMany() {
+		return this.items
+	}
+
+	async findById(id: string) {
+		return this.items.find(item => item.id.toString() === id) || null
+	}
 }

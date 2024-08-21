@@ -1,12 +1,13 @@
 import { Entity } from '@/core/entities/entity'
 import { Identity } from '@/core/entities/identity'
 import { Optional } from '@/core/types/optional'
+import Color from '@/domain/shared/color'
 
 type NoteType = {
 	userId: string
 	title: string
 	text: string
-	color: string
+	color: Color
 	isFavorite: boolean
 	createdAt: Date
 	updatedAt: Date
@@ -24,7 +25,7 @@ export class Note extends Entity<NoteType> {
 			{
 				...data,
 				isFavorite: data.isFavorite ?? false,
-				color: data.color ?? '#FFFFFF',
+				color: data.color ?? Color.create('#FFFFFF'),
 				text: data.text ?? '',
 				createdAt: data.createdAt ?? new Date(),
 				updatedAt: data.updatedAt ?? new Date()
@@ -41,7 +42,7 @@ export class Note extends Entity<NoteType> {
 		return this.attributes.text
 	}
 
-	get color(): string {
+	get color() {
 		return this.attributes.color
 	}
 
@@ -69,7 +70,7 @@ export class Note extends Entity<NoteType> {
 		this.attributes.text = text
 	}
 
-	set color(color: string) {
+	set color(color: Color) {
 		this.attributes.color = color
 	}
 

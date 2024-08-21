@@ -30,8 +30,10 @@ export class InMemoryNoteRepository extends NoteRepository {
 		this.items.splice(index, 1)
 	}
 
-	async toggleNoteFavorite(id: string, isFavorite: boolean): Promise<void> {
-		const index = this.items.findIndex(item => item.id.toString() === id)
-		this.items[index].isFavorite = isFavorite
+	async toggleNoteFavorite(note: Note): Promise<void> {
+		const index = this.items.findIndex(
+			item => item.id.toString() === note.id.toString()
+		)
+		this.items[index] = note
 	}
 }

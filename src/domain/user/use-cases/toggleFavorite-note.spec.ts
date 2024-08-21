@@ -35,9 +35,8 @@ describe('ToggleFavoriteNoteUseCase', () => {
 		expect(note.isFavorite).toBe(false)
 
 		const response = await useCase.execute({
-			noteId: note.id.toString(),
-			userId: user.id.toString(),
-			favorite: true
+			id: note.id.toString(),
+			userId: user.id.toString()
 		})
 
 		expect(response.isRight()).toBe(true)
@@ -54,9 +53,8 @@ describe('ToggleFavoriteNoteUseCase', () => {
 		userRepository.items.push(user)
 
 		const response = await useCase.execute({
-			noteId: 'invalid_id',
-			userId: user.id.toString(),
-			favorite: true
+			id: 'invalid_id',
+			userId: user.id.toString()
 		})
 
 		expect(response.isLeft()).toBe(true)
@@ -71,9 +69,8 @@ describe('ToggleFavoriteNoteUseCase', () => {
 		noteRepository.items.push(note)
 
 		const response = await useCase.execute({
-			noteId: note.id.toString(),
-			userId: 'invalid_id',
-			favorite: true
+			id: note.id.toString(),
+			userId: 'invalid_id'
 		})
 
 		expect(response.isLeft()).toBe(true)
@@ -96,9 +93,8 @@ describe('ToggleFavoriteNoteUseCase', () => {
 		noteRepository.items.push(note)
 
 		const response = await useCase.execute({
-			noteId: note.id.toString(),
-			userId: user.id.toString(),
-			favorite: true
+			id: note.id.toString(),
+			userId: user.id.toString()
 		})
 
 		expect(response.isLeft()).toBe(true)

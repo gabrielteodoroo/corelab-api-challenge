@@ -7,9 +7,8 @@ import { UserRepository } from '../repositories/user-repository'
 type Response = Either<NotFoundError | NoteNotOwnedByUserError, boolean>
 
 type Request = {
-	noteId: string
+	id: string
 	userId: string
-	favorite: boolean
 }
 
 export class ToggleFavoriteNoteUseCase {
@@ -18,8 +17,8 @@ export class ToggleFavoriteNoteUseCase {
 		private userRepository: UserRepository
 	) {}
 
-	async execute({ noteId, userId }: Request): Promise<Response> {
-		const note = await this.noteRepository.findById(noteId)
+	async execute({ id, userId }: Request): Promise<Response> {
+		const note = await this.noteRepository.findById(id)
 
 		if (!note) {
 			return left(new NotFoundError())
@@ -35,7 +34,9 @@ export class ToggleFavoriteNoteUseCase {
 			return left(new NotFoundError())
 		}
 
-		await this.noteRepository.toggleNoteFavorite(noteId, !note.isFavorite)
+		note.isFavorite = !note.isFavorite
+
+		await this.noteRepository.toggleNoteFavorite(note)
 
 		return right(true)
 	}

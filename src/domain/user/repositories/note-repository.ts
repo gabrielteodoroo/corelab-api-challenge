@@ -6,5 +6,5 @@ export abstract class NoteRepository {
 	abstract findById(id: string): Promise<Note | null>
 	abstract save(note: Note): Promise<void>
 	abstract delete(id: string): Promise<void>
-	abstract toggleNoteFavorite(id: string, isFavorite: boolean): Promise<void>
+	abstract toggleNoteFavorite(note: Note): Promise<void>
 }

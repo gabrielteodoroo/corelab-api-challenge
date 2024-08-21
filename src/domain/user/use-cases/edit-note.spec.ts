@@ -5,6 +5,7 @@ import { EditNoteUseCase } from './edit-note'
 import { InMemoryNoteRepository } from '../../../../test/repositories/in-memory-note-repository'
 import { Identity } from '@/core/entities/identity'
 import { Note } from '../entities/note'
+import Color from '@/domain/shared/color'
 
 let useCase: EditNoteUseCase
 let userRepository: InMemoryUserRepository
@@ -31,7 +32,7 @@ describe('EditNoteUseCase', () => {
 
 		const note = Note.create({
 			title: 'title',
-			color: 'color',
+			color: Color.create('#000000'),
 			isFavorite: false,
 			text: 'text',
 			userId: user.id.toString()
@@ -43,7 +44,7 @@ describe('EditNoteUseCase', () => {
 			id: note.id.toString(),
 			userId: user.id.toString(),
 			title: 'new_title',
-			color: 'new_color',
+			color: '#ff0c0c',
 			isFavorite: true,
 			text: 'new_text',
 			updatedAt: note.updatedAt,
@@ -52,7 +53,7 @@ describe('EditNoteUseCase', () => {
 
 		expect(response.isRight()).toBe(true)
 		expect(noteRepository.items[0].userId).toBe(user.id.toString())
-		expect(noteRepository.items[0].color).toBe('new_color')
+		expect(noteRepository.items[0].color.value).toBe('#ff0c0c')
 		expect(noteRepository.items[0].title).toBe('new_title')
 		expect(noteRepository.items[0].isFavorite).toBe(true)
 		expect(noteRepository.items[0].text).toBe('new_text')
@@ -66,7 +67,7 @@ describe('EditNoteUseCase', () => {
 			id: 'invalid_id',
 			userId: 'user_id',
 			title: 'title',
-			color: 'color',
+			color: '#000000',
 			isFavorite: false,
 			text: 'text',
 			updatedAt: new Date(),
@@ -79,7 +80,7 @@ describe('EditNoteUseCase', () => {
 	test('should not edit a note if the user does not exist', async () => {
 		const note = Note.create({
 			title: 'title',
-			color: 'color',
+			color: Color.create('#000000'),
 			isFavorite: false,
 			text: 'text',
 			userId: 'user_id'
@@ -91,7 +92,7 @@ describe('EditNoteUseCase', () => {
 			id: note.id.toString(),
 			userId: 'invalid_user_id',
 			title: 'new_title',
-			color: 'new_color',
+			color: '#ff0c0c',
 			isFavorite: true,
 			text: 'new_text',
 			updatedAt: note.updatedAt,

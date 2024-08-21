@@ -40,7 +40,7 @@ describe('CreateUserUseCase', () => {
 		expect(noteRepository.items[0].createdAt).toBeInstanceOf(Date)
 		expect(noteRepository.items[0].updatedAt).toBeInstanceOf(Date)
 		expect(noteRepository.items[0].isFavorite).toBe(false)
-		expect(noteRepository.items[0].color).toBe('#FFFFFF')
+		expect(noteRepository.items[0].color.value).toBe('#FFFFFF')
 	})
 
 	test('Should return an error if user does not exist.', async () => {

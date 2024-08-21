@@ -61,10 +61,6 @@ export class Note extends Entity<NoteType> {
 		return this.attributes.userId
 	}
 
-	set userId(userId: string) {
-		this.attributes.userId = userId
-	}
-
 	set title(title: string) {
 		this.attributes.title = title
 	}

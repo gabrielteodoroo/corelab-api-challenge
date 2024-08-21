@@ -16,4 +16,11 @@ export class InMemoryNoteRepository extends NoteRepository {
 	async findById(id: string) {
 		return this.items.find(item => item.id.toString() === id) || null
 	}
+
+	async save(note: Note) {
+		const index = this.items.findIndex(
+			item => item.id.toString() === note.id.toString()
+		)
+		this.items[index] = note
+	}
 }

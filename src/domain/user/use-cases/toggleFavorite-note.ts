@@ -12,13 +12,13 @@ type Request = {
 	favorite: boolean
 }
 
-export class FavoriteNoteUseCase {
+export class ToggleFavoriteNoteUseCase {
 	constructor(
 		private noteRepository: NoteRepository,
 		private userRepository: UserRepository
 	) {}
 
-	async execute({ favorite, noteId, userId }: Request): Promise<Response> {
+	async execute({ noteId, userId }: Request): Promise<Response> {
 		const note = await this.noteRepository.findById(noteId)
 
 		if (!note) {
@@ -35,9 +35,7 @@ export class FavoriteNoteUseCase {
 			return left(new NotFoundError())
 		}
 
-		note.isFavorite = favorite
-
-		await this.noteRepository.save(note)
+		await this.noteRepository.toggleNoteFavorite(noteId, !note.isFavorite)
 
 		return right(true)
 	}

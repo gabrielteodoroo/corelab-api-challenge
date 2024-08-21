@@ -3,17 +3,17 @@ import Email from '@/domain/shared/email'
 import { User } from '../entities/user'
 import { InMemoryNoteRepository } from '../../../../test/repositories/in-memory-note-repository'
 import { Note } from '../entities/note'
-import { FavoriteNoteUseCase } from './favorite-note'
+import { ToggleFavoriteNoteUseCase } from './toggleFavorite-note'
 
-let useCase: FavoriteNoteUseCase
+let useCase: ToggleFavoriteNoteUseCase
 let userRepository: InMemoryUserRepository
 let noteRepository: InMemoryNoteRepository
 
-describe('FavoriteNoteUseCase', () => {
+describe('ToggleFavoriteNoteUseCase', () => {
 	beforeEach(async () => {
 		noteRepository = new InMemoryNoteRepository()
 		userRepository = new InMemoryUserRepository()
-		useCase = new FavoriteNoteUseCase(noteRepository, userRepository)
+		useCase = new ToggleFavoriteNoteUseCase(noteRepository, userRepository)
 	})
 
 	test('should favorite a note', async () => {

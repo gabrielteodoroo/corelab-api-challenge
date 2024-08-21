@@ -56,4 +56,15 @@ describe('DeleteNoteUseCase', () => {
 		expect(response.isLeft()).toBe(true)
 		expect(response.value).toBeInstanceOf(Error)
 	})
+
+	test('should return a NoteNotOwnedByUserError if the note does not belong to the user', async () => {
+		expect(noteRepository.items).toHaveLength(1)
+
+		const response = await useCase.handle({
+			noteId: noteRepository.items[0].id.toString(),
+			userId: 'invalid_id'
+		})
+
+		expect(response.isLeft()).toBe(true)
+	})
 })

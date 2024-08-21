@@ -5,4 +5,5 @@ export abstract class NoteRepository {
 	abstract findMany(): Promise<Note[]>
 	abstract findById(id: string): Promise<Note | null>
 	abstract save(note: Note): Promise<void>
+	abstract delete(id: string): Promise<void>
 }

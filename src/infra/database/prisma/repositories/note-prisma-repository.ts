@@ -16,8 +16,10 @@ export class NotePrismaRepository implements NoteRepository {
 		return NotePrismaMapper.toDomain(createdUser)
 	}
 
-	async findMany(): Promise<Note[]> {
-		const data = await this.prismaService.note.findMany()
+	async findMany(userId): Promise<Note[]> {
+		const data = await this.prismaService.note.findMany({
+			where: { userId }
+		})
 
 		return data.map(NotePrismaMapper.toDomain)
 	}

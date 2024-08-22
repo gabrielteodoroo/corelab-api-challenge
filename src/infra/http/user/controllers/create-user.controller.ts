@@ -8,8 +8,10 @@ import {
 } from '@nestjs/common'
 import { CreateUserDTO } from '../dtos/create-user.dto'
 import { UserPresenter } from '@/infra/presenters/user-presenter'
+import { Public } from '@/infra/auth/public'
 
 @Controller('/user')
+@Public()
 export class CreateUserController {
 	constructor(private readonly createUserUseCase: CreateUserUseCase) {}
 

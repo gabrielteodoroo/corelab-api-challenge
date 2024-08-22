@@ -39,14 +39,20 @@ describe('GetNoteUseCase', () => {
 
 		noteRepository.items.push(note)
 
-		const response = await useCase.handle({ id: 'note_id' })
+		const response = await useCase.handle({
+			id: 'note_id',
+			userId: 'user_id'
+		})
 
 		expect(noteRepository.items[0]).toEqual(response.value)
 		expect(response.isRight()).toBe(true)
 	})
 
 	test('should return null if the note does not exist', async () => {
-		const response = await useCase.handle({ id: 'invalid_id' })
+		const response = await useCase.handle({
+			id: 'invalid_id',
+			userId: 'user_id'
+		})
 
 		expect(response.isLeft()).toBe(true)
 	})

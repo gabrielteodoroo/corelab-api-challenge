@@ -14,8 +14,14 @@ export class InMemoryNoteRepository extends NoteRepository {
 		return notes
 	}
 
-	async findById(id: string) {
-		return this.items.find(item => item.id.toString() === id) || null
+	async findById({ id, userId }: { id: string; userId: string }) {
+		return (
+			this.items.find(
+				item =>
+					item.id.toString() === id &&
+					item.userId.toString() === userId
+			) || null
+		)
 	}
 
 	async save(note: Note) {

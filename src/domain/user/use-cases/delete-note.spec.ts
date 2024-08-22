@@ -14,7 +14,7 @@ describe('DeleteNoteUseCase', () => {
 	beforeEach(() => {
 		noteRepository = new InMemoryNoteRepository()
 		userRepository = new InMemoryUserRepository()
-		useCase = new DeleteNoteUseCase(noteRepository, userRepository)
+		useCase = new DeleteNoteUseCase(noteRepository)
 
 		const user = User.create(
 			{

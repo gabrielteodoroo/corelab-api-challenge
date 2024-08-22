@@ -2,6 +2,7 @@ import { plainToInstance } from 'class-transformer'
 import {
 	IsEnum,
 	IsNumber,
+	IsString,
 	IsUrl,
 	Max,
 	Min,
@@ -26,6 +27,9 @@ class EnvironmentVariables {
 
 	@IsUrl({ protocols: ['postgresql'], require_tld: false })
 	DATABASE_URL: string
+
+	@IsString()
+	JWT_TOKEN: string
 }
 
 export function validate(config: Record<string, unknown>) {

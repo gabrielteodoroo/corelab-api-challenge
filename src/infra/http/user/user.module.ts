@@ -4,7 +4,7 @@ import { CreateUserUseCase } from '@/domain/user/use-cases/create-user'
 import { CryptoModule } from '@/infra/crypto/crypto.module'
 import { DatabaseModule } from '@/infra/database/database.module'
 import { Module } from '@nestjs/common'
-import { CreateUserController } from './controllers/create-employee.controller'
+import { CreateUserController } from './controllers/create-user.controller'
 
 @Module({
 	imports: [DatabaseModule, CryptoModule],

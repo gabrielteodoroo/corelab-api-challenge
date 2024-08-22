@@ -2,7 +2,7 @@ import { Note } from '../entities/note'
 
 export abstract class NoteRepository {
 	abstract create(user: Note): Promise<Note>
-	abstract findMany(): Promise<Note[]>
+	abstract findMany(userId: string): Promise<Note[]>
 	abstract findById(id: string): Promise<Note | null>
 	abstract save(note: Note): Promise<void>
 	abstract delete(id: string): Promise<void>

@@ -9,8 +9,9 @@ export class InMemoryNoteRepository extends NoteRepository {
 		return note
 	}
 
-	async findMany() {
-		return this.items
+	async findMany(userId: string) {
+		const notes = this.items.filter(note => note.userId === userId)
+		return notes
 	}
 
 	async findById(id: string) {

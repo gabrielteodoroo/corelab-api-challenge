@@ -24,8 +24,16 @@ export class NotePrismaRepository implements NoteRepository {
 		return data.map(NotePrismaMapper.toDomain)
 	}
 
-	async findById(id: string): Promise<Note | null> {
-		const note = await this.prismaService.note.findFirst({ where: { id } })
+	async findById({
+		id,
+		userId
+	}: {
+		id: string
+		userId: string
+	}): Promise<Note | null> {
+		const note = await this.prismaService.note.findFirst({
+			where: { id, userId }
+		})
 
 		if (!note) return null
 

@@ -5,24 +5,23 @@ import {
 	NotFoundException,
 	Post
 } from '@nestjs/common'
-import { Public } from '@/infra/auth/public'
 import { CreateNoteUseCase } from '@/domain/user/use-cases/create-note'
 import { NotePresenter } from '@/infra/presenters/note-presenter'
 import { CreateNoteDTO } from '../dtos/create-note.dto'
+import { LoggedUser, UserPayload } from '@/infra/auth/logged-user'
 
 @Controller('/notes')
-@Public()
 export class CreateNoteController {
 	constructor(private readonly createNoteUseCase: CreateNoteUseCase) {}
 
 	@Post()
 	@HttpCode(201)
-	async handle(@Body() body: CreateNoteDTO) {
-		const { title, userId, text } = body
+	async handle(@Body() body: CreateNoteDTO, @LoggedUser() user: UserPayload) {
+		const { title, text } = body
 
 		const response = await this.createNoteUseCase.handle({
 			title,
-			userId,
+			userId: user.id,
 			text
 		})
 

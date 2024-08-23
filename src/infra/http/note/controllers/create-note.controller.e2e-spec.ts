@@ -47,8 +47,8 @@ describe('CreateNoteController', () => {
 			.set('Authorization', `Bearer ${token}`)
 			.send({
 				title: 'Note title',
-				userId: user.id,
-				text: 'Note text'
+				text: 'Note text',
+				userId: user.id
 			})
 
 		expect(response.statusCode).toBe(201)

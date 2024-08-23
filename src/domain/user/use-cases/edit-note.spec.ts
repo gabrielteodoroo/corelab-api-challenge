@@ -46,9 +46,7 @@ describe('EditNoteUseCase', () => {
 			title: 'new_title',
 			color: '#ff0c0c',
 			isFavorite: true,
-			text: 'new_text',
-			updatedAt: note.updatedAt,
-			createdAt: note.createdAt
+			text: 'new_text'
 		})
 
 		expect(response.isRight()).toBe(true)
@@ -69,9 +67,7 @@ describe('EditNoteUseCase', () => {
 			title: 'title',
 			color: '#000000',
 			isFavorite: false,
-			text: 'text',
-			updatedAt: new Date(),
-			createdAt: new Date()
+			text: 'text'
 		})
 
 		expect(response.isLeft()).toBe(true)
@@ -94,9 +90,7 @@ describe('EditNoteUseCase', () => {
 			title: 'new_title',
 			color: '#ff0c0c',
 			isFavorite: true,
-			text: 'new_text',
-			updatedAt: note.updatedAt,
-			createdAt: note.createdAt
+			text: 'new_text'
 		})
 
 		expect(response.isLeft()).toBe(true)
@@ -130,9 +124,7 @@ describe('EditNoteUseCase', () => {
 			title: 'new_title',
 			color: '111',
 			isFavorite: true,
-			text: 'new_text',
-			updatedAt: note.updatedAt,
-			createdAt: note.createdAt
+			text: 'new_text'
 		})
 
 		expect(response.isLeft()).toBe(true)

@@ -12,8 +12,6 @@ type Request = {
 	text: string
 	color: string
 	isFavorite: boolean
-	createdAt: Date
-	updatedAt: Date
 }
 
 type Response = Either<NotFoundError | InvalidColorError, Note>
